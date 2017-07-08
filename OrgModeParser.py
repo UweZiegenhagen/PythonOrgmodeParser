@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
+"""
+@author: Uwe Ziegenhagen, ziegenhagen@gmail.com
+"""
+
 import re
  
-def parseEmaceOrgmode(s):
+def parseEmacsOrgmode(s):
     r = '^([\*]+)?\s?(TODO|PROGRESSING|FEEDBACK|VERIFY|POSTPONED|DELEGATED|CANCELLED|DONE)?\s?(\[#[A|B|C]\])?\s?(.*?)\s*(:(.*):)?$'    
     m = re.search(r,s)
     level = m.group(1)
@@ -19,9 +23,9 @@ def parseEmaceOrgmode(s):
     tags.append(a)
     return(level, m.group(2), prio, m.group(4), tags)
  
-with open("../orgmode.org", "r") as ins:
+with open("./testfiles/minimal.org", "r") as ins:
     for line in ins:
-        level, status, priority, task, tags = parseEmaceOrgmode(line)
+        level, status, priority, task, tags = parseEmacsOrgmode(line)
         if level is not None:        
             print('Level:', level)
             print('Status:', status)
